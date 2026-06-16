@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>נפלאות הבינה - סדנאות קיץ בבינה מלאכותית</title>
+  <meta name="description" content="סדנאות קיץ בבינה מלאכותית - מרתון יוצרים, מרתון סרטונים ומרתון פיתוח בתאריכים 16/7/26, 20/7/26 ו-21/7/26.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: "Open Sans", Arial, Helvetica, sans-serif;
+      --bg: #f3f0ff;
+      --ink: #15152f;
+      --muted: #555b73;
+      --blue: #17007b;
+      --deep: #17007b;
+      --cyan: #06b6d4;
+      --pink: #e91e8c;
+      --orange: #f97316;
+      --red: #f97316;
+      --card: #ffffff;
+      --line: #dbe2f2;
+      --shadow: 0 18px 50px rgba(23, 0, 123, .16);
+    }
+
+    * { box-sizing: border-box; font-family: var(--font-sans); }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--bg); line-height: 1.5; }
+    button, input, textarea, select { font: inherit; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0;
+      margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap; border: 0;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(238,241,247,.92);
+      border-bottom: 1px solid rgba(219,226,242,.9);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px)); margin: 0 auto;
+      min-height: 66px; display: flex;
+      align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand { font-size: 20px; font-weight: 900; color: var(--deep); white-space: nowrap; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 46px; padding: 10px 18px; border-radius: 8px;
+      border: 2px solid transparent; text-decoration: none;
+      font-size: 17px; font-weight: 900; text-align: center;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(23,0,123,.18); }
+    .btn-primary { background: var(--red); color: #fff; }
+    .btn-secondary { background: #fff; color: var(--deep); border-color: #d8ddf0; }
+
+    /* HAMBURGER */
+    .hamburger-btn { display: none; }
+    .mobile-menu { display: none; }
+
+    /* HERO BANNER */
+    .hero { background: #17007b; color: #fff; }
+    .hero-banner { width: 100%; background: #17007b; display: block; }
+    .hero-banner img { width: 100%; height: auto; display: block; }
+    .hero-banner .baner-mobile { display: none; }
+    .hero-title { display: none; }
+
+    /* TICKER */
+    .ticker-wrap {
+      background: #17007b; color: #fff;
+      overflow: hidden; padding: 8px 0;
+      border-top: 1px solid rgba(255,255,255,.15);
+    }
+    .ticker {
+      display: inline-block; white-space: nowrap;
+      animation: ticker 28s linear infinite;
+      font-size: 15px; font-weight: 600; opacity: .85;
+    }
+    @keyframes ticker { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+
+    /* MAIN */
+    main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 38px 0 72px; }
+
+    .tagline {
+      margin: 0 0 28px; color: var(--deep); text-align: center;
+      font-size: clamp(24px,4vw,42px); line-height: 1.16; font-weight: 900;
+    }
+
+    /* TRACKS */
+    .tracks { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+    .track {
+      display: flex; flex-direction: column; background: var(--card);
+      border: 2px solid var(--line); border-top: 8px solid currentColor;
+      border-radius: 8px; padding: 24px 22px;
+      box-shadow: 0 14px 34px rgba(23,0,123,.08);
+    }
+    .track h3 { margin: 0 0 6px; font-size: clamp(26px,3vw,36px); font-weight: 900; line-height: 1.05; }
+    .track-date { margin: 0 0 16px; color: #050505; font-size: 20px; font-weight: 700; }
+    .session { padding: 16px 0; border-top: 1px solid var(--line); }
+    .session:first-of-type { border-top: 0; padding-top: 0; }
+    .time { margin: 0 0 5px; color: #050505; font-size: 18px; font-weight: 700; }
+    .session-title { margin: 0; color: var(--blue); font-size: 22px; line-height: 1.16; font-weight: 900; }
+    .desc { margin: 7px 0 0; color: #111; font-size: 16px; }
+    .track .btn { width: 100%; margin-top: auto; background: var(--deep); color: #fff; }
+    .cyan { color: var(--cyan); }
+    .pink { color: var(--pink); }
+    .orange { color: var(--orange); }
+
+    /* MENTOR */
+    .mentor {
+      margin-top: 28px; padding: 3px 24px;
+      background: #c8f0f8; border-radius: 8px;
+      display: flex; align-items: center; gap: 24px;
+      color: #111;
+    }
+    .mentor-img { width: clamp(150px,20vw,240px); flex-shrink: 0; }
+    .mentor-img img { width: 100%; height: auto; display: block; }
+    .mentor-text strong { display: block; font-size: clamp(22px,3vw,34px); line-height: 1.12; margin-bottom: 12px; }
+    .mentor-text p { color: #333; font-size: 18px; line-height: 1.65; margin: 0; }
+
+    /* PRICING */
+    .pricing { margin-top: 34px; }
+    .pricing h2 { color: var(--deep); font-size: clamp(28px,4vw,44px); margin: 0 0 20px; text-align: center; }
+    .price-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; align-items: start; }
+
+    .price-card {
+      background: var(--card); border-radius: 12px;
+      padding: 28px 22px; box-shadow: var(--shadow);
+      border: 2px solid var(--line); position: relative;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .price-card.featured { border-color: var(--orange); border-width: 3px; }
+
+    .ribbon {
+      position: absolute; top: 14px; left: -6px;
+      background: var(--orange); color: #fff;
+      font-size: 13px; font-weight: 800;
+      padding: 4px 14px 4px 10px;
+      border-radius: 0 4px 4px 0;
+    }
+    .ribbon::before {
+      content: ''; position: absolute;
+      bottom: -6px; left: 0;
+      border: 3px solid #b85512;
+      border-left-color: transparent; border-bottom-color: transparent;
+    }
+
+    .pc-label { margin: 0; font-size: 15px; font-weight: 700; color: var(--muted); text-align: center; }
+    .pc-amount {
+      margin: 0; font-size: 52px; font-weight: 900;
+      color: var(--deep); text-align: center; line-height: 1;
+    }
+    .pc-amount span { font-size: 28px; vertical-align: super; }
+    .best-value-note { margin: 0; font-size: 14px; color: #666; text-align: center; font-style: italic; }
+
+    .pc-cyan-btn { background: var(--cyan); color: #fff; border: none; border-radius: 8px; padding: 12px 18px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; }
+    .pc-pink-btn { background: var(--pink); color: #fff; border: none; border-radius: 8px; padding: 12px 18px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; }
+
+    .session-list {
+      list-style: none; margin: 0; padding: 0;
+      border: 1px solid var(--line); border-radius: 8px;
+      overflow: hidden; display: none;
+      position: absolute; z-index: 10;
+      background: #fff; width: calc(100% - 44px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    }
+    .session-list.open { display: block; }
+    .session-list li { border-bottom: 1px solid var(--line); }
+    .session-list li:last-child { border-bottom: none; }
+    .session-list a {
+      display: block; padding: 12px 16px;
+      font-size: 15px; font-weight: 600; color: var(--deep);
+      text-decoration: none; text-align: right;
+    }
+    .session-list a:hover { background: #f3f0ff; }
+
+    /* PROMO BANNER */
+    .promo-banner {
+      margin-top: 28px; background: #17007b; color: #fff;
+      border-radius: 10px; padding: 22px 28px;
+      display: flex; justify-content: space-between;
+      align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    .promo-text { margin: 0; font-size: 18px; font-weight: 700; }
+    .promo-cta {
+      background: var(--orange); color: #fff;
+      padding: 10px 22px; border-radius: 8px;
+      text-decoration: none; font-weight: 800; font-size: 16px;
+      white-space: nowrap;
+    }
+
+    /* REVIEWS */
+    .reviews {
+      margin-top: 34px;
+      display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px;
+    }
+    .review-card {
+      background: var(--card); border-radius: 10px;
+      padding: 20px; font-size: 16px; line-height: 1.6;
+      color: var(--ink); box-shadow: 0 6px 20px rgba(23,0,123,.08);
+      border: 1px solid var(--line);
+    }
+    .review-card span { display: block; margin-top: 10px; font-weight: 700; color: var(--muted); font-size: 14px; }
+
+    /* NOTE */
+    .note { margin: 18px 0 0; color: var(--muted); font-size: 15px; text-align: center; }
+
+    /* FOOTER */
+    footer {
+      background: #17007b; color: #fff;
+      text-align: center; padding: 32px 16px; margin-top: 0;
+    }
+
+    /* MEDIA QUERIES */
+    @media (max-width: 980px) {
+      .tracks, .price-cards, .reviews { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .mentor { flex-direction: column; text-align: center; gap: 10px; padding: 18px 16px; }
+      .mentor-img { width: 100%; max-width: 200px; margin: 0 auto; }
+      .mentor-text { text-align: right; }
+      .mentor-text strong { font-size: 18px; margin-bottom: 8px; }
+      .mentor-text p { font-size: 13px; line-height: 1.6; margin: 0; }
+      .promo-banner { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 620px) {
+      .topbar { display: none; }
+
+      .mentor-text p { font-size: 13px; line-height: 1.5; }
+
+      .hero-banner { display: block; min-height: unset; }
+      .hero-banner .baner-desktop { display: none; }
+      .hero-banner .baner-mobile { display: block; width: 100%; height: auto; }
+
+      .hamburger-btn {
+        display: flex; position: fixed; top: 12px; left: 12px; z-index: 30;
+        flex-direction: column; gap: 5px;
+        background: rgba(0,0,0,.35); border: none; border-radius: 8px;
+        cursor: pointer; padding: 9px 10px;
+      }
+      .hamburger-btn span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+
+      .mobile-menu {
+        position: fixed; top: 0; right: 0; left: 0;
+        background: rgba(255,255,255,.97); backdrop-filter: blur(16px);
+        z-index: 29; flex-direction: column;
+        padding: 56px 0 20px;
+        box-shadow: 0 8px 32px rgba(23,0,123,.12);
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        padding: 15px 28px; font-size: 17px; font-weight: 600;
+        color: var(--deep); text-decoration: none;
+        border-bottom: 1px solid #eee; text-align: right;
+      }
+      .mobile-menu a:last-child { border-bottom: none; }
+
+      .reviews { grid-template-columns: 1fr; }
+
+      .tagline { font-size: 20px; }
+      .track h3 { font-size: 22px; }
+      .track-date { font-size: 15px; }
+      .time { font-size: 14px; }
+      .session-title { font-size: 17px; }
+      .desc { font-size: 13px; }
+      .pricing h2 { font-size: 22px; }
+      .pc-amount { font-size: 38px; }
+      .pc-amount span { font-size: 20px; }
+      .promo-text { font-size: 15px; }
+      .review-card { font-size: 14px; padding: 14px; }
+      main { padding: 20px 0 48px; }
+      .tracks, .price-cards { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">נפלאות הבינה</div>
+      <nav class="nav-actions" aria-label="ניווט מהיר">
+        <a class="btn btn-secondary" href="#tracks">מסלולי הסדנה</a>
+        <a class="btn btn-primary" href="#pricing">הרשמה ותשלום</a>
+      </nav>
+    </div>
+  </header>
+
+  <button class="hamburger-btn" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="תפריט">
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#tracks" onclick="document.getElementById('mobileMenu').classList.remove('open')">מרתונים</a>
+    <a href="#pricing" onclick="document.getElementById('mobileMenu').classList.remove('open')">פרטים והרשמה</a>
+    <a href="#testimonials" onclick="document.getElementById('mobileMenu').classList.remove('open')">המלצות</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-banner">
+      <img class="baner-desktop" src="baner 4.png" alt="נפלאות הבינה - סדנאות קיץ בבינה מלאכותית">
+      <img class="baner-mobile" src="baner nayad.png" alt="נפלאות הבינה - סדנאות קיץ בבינה מלאכותית">
+      <div class="hero-title">
+        <p class="eyebrow">SUMMER AI MARATHON 2026</p>
+        <h1>נפלאות הבינה</h1>
+        <p class="lead">סדנאות קיץ<br>בבינה מלאכותית</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker-wrap">
+    <span class="ticker">נפלאות הבינה &nbsp;·&nbsp; סדנאות קיץ בבינה מלאכותית &nbsp;·&nbsp; מרתון יוצרים &nbsp;·&nbsp; מרתון סרטונים &nbsp;·&nbsp; מרתון פיתוח &nbsp;·&nbsp; 16/7 · 20/7 · 21/7 &nbsp;·&nbsp; נפלאות הבינה &nbsp;·&nbsp; סדנאות קיץ בבינה מלאכותית &nbsp;·&nbsp;</span>
+  </div>
+
+  <main>
+    <p class="tagline">קיץ אחד שישנה את הדרך שבה אתם עובדים עם AI</p>
+
+    <section id="tracks" class="tracks" aria-label="מסלולי הסדנאות">
+
+      <article class="track cyan">
+        <h3>מרתון יוצרים</h3>
+        <p class="track-date">יום ה׳ 16/7/26</p>
+        <div class="session">
+          <p class="time">9:00-10:30</p>
+          <p class="session-title">תמונות עם AI - הסודות של אנשי המקצוע</p>
+          <p class="desc">דמויות עקביות, פרומפטים מנצחים וכלים חדשים.</p>
+        </div>
+        <div class="session">
+          <p class="time">11:30-13:00</p>
+          <p class="session-title">מצגות AI שומטות לסת</p>
+          <p class="desc">Gemini, Claude, NotebookLM, Mentimeter ועוד.</p>
+        </div>
+        <div class="session">
+          <p class="time">20:30-21:30</p>
+          <p class="session-title">Canva AI כל החידושים</p>
+          <p class="desc">Canva + Claude, חידושים ועיצוב חכם.</p>
+        </div>
+        <a class="btn" href="#pricing">להרשמה למרתון יוצרים</a>
+      </article>
+
+      <article class="track pink">
+        <h3>מרתון סרטונים</h3>
+        <p class="track-date">יום ב׳ 20/7/26</p>
+        <div class="session">
+          <p class="time">9:00-10:30</p>
+          <p class="session-title">סרטונים — הדור הבא</p>
+          <p class="desc">Gemini, Omni, שינויי סגנון, המשכיות בין סצנות ועוד.</p>
+        </div>
+        <div class="session">
+          <p class="time">11:30-13:00</p>
+          <p class="session-title">אולפן ההפקות AI</p>
+          <p class="desc">מוזיקה ודיבוב, גם בעברית! ברמה של אולפן הקלטות.</p>
+        </div>
+        <div class="session">
+          <p class="time">20:00-22:00</p>
+          <p class="session-title">מרעיון לסרטון המלא</p>
+          <p class="desc">הסיפור, סטוריבורד, סקרינשוטים ועריכה ב-Canva.</p>
+        </div>
+        <a class="btn" href="#pricing">להרשמה למרתון סרטונים</a>
+      </article>
+
+      <article class="track orange">
+        <h3>מרתון פיתוח</h3>
+        <p class="track-date">יום ג׳ 21/7/26</p>
+        <div class="session">
+          <p class="time">9:00-11:00</p>
+          <p class="session-title">מרעיון לאתר</p>
+          <p class="desc">אפיון, פיתוח ו-UX/UI.</p>
+        </div>
+        <div class="session">
+          <p class="time">11:30-14:00</p>
+          <p class="session-title">משגרים לאוויר</p>
+          <p class="desc">פרסום האתר, GitHub ומפתחות API.</p>
+        </div>
+        <div class="session">
+          <p class="time">20:00-22:00</p>
+          <p class="session-title">סוכני AI שעובדים בשבילך</p>
+          <p class="desc">סקילים, סוכנים ואוטומציה בקלוד קוד.</p>
+        </div>
+        <a class="btn" href="#pricing">להרשמה למרתון פיתוח</a>
+      </article>
+
+    </section>
+
+    <section class="mentor" aria-label="מנחת הסדנאות">
+      <div class="mentor-img">
+        <img src="shira-roth.png" alt="שירה רוט זליקוביץ">
+      </div>
+      <div class="mentor-text">
+        <p>שירה רוט זליקוביץ היא מרצה, יוצרת תוכן ומובילת חדשנות בתחום הבינה המלאכותית. בשנים האחרונות היא מלווה אנשי חינוך ויוצרי תוכן בהיכרות עם הכלים החדשניים ביותר, תוך דגש על יצירתיות, יישום מעשי ופיתוח תחושת מסוגלות בעולם המשתנה במהירות. ההכשרות שלה משלבות השראה, התנסות ותוצרים אמיתיים, ומעניקות למשתתפים כלים שאפשר להתחיל ליישם כבר למחרת.</p>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <h2>בחרו את המסלול שלכם</h2>
+      <div class="price-cards">
+
+        <div class="price-card pc-cyan">
+          <p class="pc-label">סדנה בודדת</p>
+          <p class="pc-amount"><span>₪</span>55</p>
+          <button class="btn pc-cyan-btn" onclick="this.nextElementSibling.classList.toggle('open')">בחרו סדנה ↓</button>
+          <ul class="session-list">
+            <li><a href="https://www.lomdot.org/event-details/photos" target="_blank" rel="noopener">תמונות עם AI</a></li>
+            <li><a href="https://www.lomdot.org/event-details/presentations" target="_blank" rel="noopener">מצגות AI</a></li>
+            <li><a href="https://www.lomdot.org/event-details/canva-ai-news" target="_blank" rel="noopener">Canva AI</a></li>
+            <li><a href="https://www.lomdot.org/event-details/newaivideos" target="_blank" rel="noopener">סרטונים — הדור הבא</a></li>
+            <li><a href="https://www.lomdot.org/event-details/recordingstudio" target="_blank" rel="noopener">אולפן הפקות AI</a></li>
+            <li><a href="https://www.lomdot.org/event-details/video-idea" target="_blank" rel="noopener">מרעיון לסרטון</a></li>
+            <li><a href="https://www.lomdot.org/event-details/websit-eidea" target="_blank" rel="noopener">מרעיון לאתר</a></li>
+            <li><a href="https://www.lomdot.org/event-details/github" target="_blank" rel="noopener">משגרים לאוויר</a></li>
+            <li><a href="https://www.lomdot.org/event-details/agents" target="_blank" rel="noopener">סוכני AI</a></li>
+          </ul>
+        </div>
+
+        <div class="price-card pc-pink">
+          <p class="pc-label">יום מלא · 3 סדנאות</p>
+          <p class="pc-amount"><span>₪</span>140</p>
+          <button class="btn pc-pink-btn" onclick="this.nextElementSibling.classList.toggle('open')">בחרו את היום שלכם ↓</button>
+          <ul class="session-list session-list-pink">
+            <li><a href="https://www.lomdot.org/event-details/creators-marathon" target="_blank" rel="noopener">מרתון יוצרים · יום ה׳ 16/7</a></li>
+            <li><a href="https://www.lomdot.org/event-details/video-marathon" target="_blank" rel="noopener">מרתון סרטונים · יום ב׳ 20/7</a></li>
+            <li><a href="https://www.lomdot.org/event-details/development-marathon" target="_blank" rel="noopener">מרתון פיתוח · יום ג׳ 21/7</a></li>
+          </ul>
+        </div>
+
+        <div class="price-card featured pc-orange">
+          <div class="ribbon">כרטיס פרימיום</div>
+          <p class="pc-label">כל 9 הסדנאות</p>
+          <p class="pc-amount"><span>₪</span>390</p>
+          <p class="best-value-note">המחיר המשתלם ביותר · ₪43 לסדנה בלבד</p>
+          <a class="btn" href="https://www.lomdot.org/event-details/marathon-2026" target="_blank" rel="noopener" style="background:var(--orange);color:#fff">להרשמה</a>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="promo-banner">
+      <p class="promo-text">כל התכנים המוקלטים וחומרי הסדנה ישלחו לנרשמים</p>
+      <a href="#pricing" class="promo-cta">בחרו עכשיו את הסדנאות שלכם ←</a>
+    </section>
+
+    <section class="reviews" id="testimonials">
+      <div class="review-card">"יצאתי עם כלים שאני משתמשת בהם כל יום. שירה מסבירה בצורה שכולם מבינים."<span>— מיכל ר׳</span></div>
+      <div class="review-card">"הסדנה על סרטונים פתחה לי עולם שלם. לא האמנתי שאעשה את זה לבד."<span>— דנה כ׳</span></div>
+      <div class="review-card">"שירה פתחה לי עולם שלם של AI — אני עוקבת אחרי הסדנאות שלה לכל מקום."<span>— תמר ש׳</span></div>
+      <div class="review-card">"מאז שאני לומדת עם שירה פתחתי קורס משלי ואני מלמדת מורים."<span>— רחל מ׳</span></div>
+      <div class="review-card">"בניתי אתר שלם ביום אחד. מדהים."<span>— אורן ל׳</span></div>
+      <div class="review-card">"שירה הכניסה אותי לעולם הקוד והיום אני בונה אפליקציות לארגון שלי."<span>— נועה ג׳</span></div>
+      <div class="review-card">"לא רק אני הרווחתי מהסדנאות של שירה — התלמידים שלי הכי הרוויחו."<span>— אביגיל כ׳</span></div>
+      <div class="review-card">"הסדנה על תמונות שינתה לי את העבודה. היום אני יוצרת תוכן ויזואלי ברמה שלא חלמתי עליה."<span>— ליאת ב׳</span></div>
+      <div class="review-card">"נכנסתי בלי ניסיון ביצירה ויצאתי עם פורטפוליו שלם. שירה גורמת לזה להיות פשוט ומהנה."<span>— עינב צ׳</span></div>
+    </section>
+
+  </main>
+
+  <footer style="background:#17007b;color:#fff;text-align:center;padding:32px 16px;margin-top:0;">
+    <p style="font-size:18px;font-weight:700;margin:0 0 16px;">נפלאות הבינה</p>
+    <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
+      <span id="email-copy" onclick="navigator.clipboard.writeText('shira@lomdot.org');this.textContent='✓ המייל הועתק!';setTimeout(()=>this.textContent='מייל',2000)" style="color:#fff;font-weight:600;cursor:pointer;">מייל</span>
+      <a href="https://www.instagram.com/shiraroth5555/" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;font-weight:600;">אינסטגרם</a>
+      <a href="https://www.facebook.com/shira.lomdot/" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;font-weight:600;">פייסבוק</a>
+      <a href="https://www.lomdot.org/" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;font-weight:600;">אתר לומדות</a>
+      <a href="https://wa.me/972523930628" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;font-weight:600;">וואטסאפ</a>
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.6);margin:0;">© 2026 שירה רוט זליקוביץ · כל הזכויות שמורות</p>
+  </footer>
+
+</body>
+</html>
