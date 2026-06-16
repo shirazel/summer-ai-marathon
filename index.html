@@ -477,5 +477,14 @@
     <p style="font-size:13px;color:rgba(255,255,255,0.6);margin:0;">© 2026 שירה רוט זליקוביץ · כל הזכויות שמורות</p>
   </footer>
 
+<script>
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.pc-cyan-btn, .pc-pink-btn, .session-list')) {
+      document.querySelectorAll('.session-list.open').forEach(function(el) {
+        el.classList.remove('open');
+      });
+    }
+  });
+</script>
 </body>
 </html>
