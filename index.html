@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>נפלאות הבינה - סדנאות קיץ בבינה מלאכותית</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2317007b'/><text y='.9em' font-size='72' x='50%' dominant-baseline='middle' text-anchor='middle'>✨</text></svg>">
   <meta name="description" content="סדנאות קיץ בבינה מלאכותית - מרתון יוצרים, מרתון סרטונים ומרתון פיתוח בתאריכים 16/7/26, 20/7/26 ו-21/7/26.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -85,9 +86,10 @@
     .ticker {
       display: inline-block; white-space: nowrap;
       animation: ticker 28s linear infinite;
+      animation-delay: -14s;
       font-size: 15px; font-weight: 600; opacity: .85;
     }
-    @keyframes ticker { from { transform: translateX(100vw); } to { transform: translateX(-100%); } }
+    @keyframes ticker { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
     /* MAIN */
     main { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 38px 0 72px; }
@@ -137,10 +139,12 @@
     .price-card {
       background: var(--card); border-radius: 12px;
       padding: 28px 22px; box-shadow: var(--shadow);
-      border: 2px solid var(--line); position: relative;
+      border: 3px solid var(--line); position: relative;
       display: flex; flex-direction: column; gap: 12px;
     }
-    .price-card.featured { border-color: var(--orange); border-width: 3px; }
+    .price-card.pc-cyan { border-color: var(--cyan); }
+    .price-card.pc-pink { border-color: var(--pink); }
+    .price-card.featured { border-color: var(--orange); }
 
     .ribbon {
       position: absolute; top: 14px; left: -6px;
@@ -161,8 +165,8 @@
       margin: 0; font-size: 52px; font-weight: 900;
       color: var(--deep); text-align: center; line-height: 1;
     }
-    .pc-amount span { font-size: 28px; vertical-align: super; }
-    .best-value-note { margin: 0; font-size: 14px; color: #666; text-align: center; font-style: italic; }
+    .pc-amount span { font-size: 20px; vertical-align: middle; }
+    .best-value-note { margin: 0; font-size: 14px; color: #444; text-align: center; font-style: italic; font-weight: 600; }
 
     .pc-cyan-btn { background: var(--cyan); color: #fff; border: none; border-radius: 8px; padding: 12px 18px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; }
     .pc-pink-btn { background: var(--pink); color: #fff; border: none; border-radius: 8px; padding: 12px 18px; font-size: 16px; font-weight: 700; cursor: pointer; width: 100%; }
@@ -396,7 +400,7 @@
 
     <section class="mentor" aria-label="מנחת הסדנאות">
       <div class="mentor-img">
-        <img src="shira-roth.png" alt="שירה רוט זליקוביץ">
+        <img src="shira-roth-low.png" alt="שירה רוט זליקוביץ">
       </div>
       <div class="mentor-text">
         <p>שירה רוט זליקוביץ היא מרצה, יוצרת תוכן ומובילת חדשנות בתחום הבינה המלאכותית. בשנים האחרונות היא מלווה אנשי חינוך ויוצרי תוכן בהיכרות עם הכלים החדשניים ביותר, תוך דגש על יצירתיות, יישום מעשי ופיתוח תחושת מסוגלות בעולם המשתנה במהירות. ההכשרות שלה משלבות השראה, התנסות ותוצרים אמיתיים, ומעניקות למשתתפים כלים שאפשר להתחיל ליישם כבר למחרת.</p>
@@ -410,6 +414,7 @@
         <div class="price-card pc-cyan">
           <p class="pc-label">סדנה בודדת</p>
           <p class="pc-amount"><span>₪</span>60</p>
+          <p class="best-value-note">בחרו בדיוק את הסדנאות שמתאימות לכם</p>
           <button class="btn pc-cyan-btn" onclick="this.nextElementSibling.classList.toggle('open')">בחרו סדנה ↓</button>
           <ul class="session-list">
             <li><a href="https://www.lomdot.org/event-details/photos" target="_blank" rel="noopener">תמונות עם AI</a></li>
@@ -427,6 +432,7 @@
         <div class="price-card pc-pink">
           <p class="pc-label">יום מלא · 3 סדנאות</p>
           <p class="pc-amount"><span>₪</span>140</p>
+          <p class="best-value-note">מחיר משתלם במיוחד · במקום <s>₪180</s></p>
           <button class="btn pc-pink-btn" onclick="this.nextElementSibling.classList.toggle('open')">בחרו את היום שלכם ↓</button>
           <ul class="session-list session-list-pink">
             <li><a href="https://www.lomdot.org/event-details/creators-marathon" target="_blank" rel="noopener">מרתון יוצרים · יום ה׳ 16/7</a></li>
@@ -436,7 +442,7 @@
         </div>
 
         <div class="price-card featured pc-orange">
-          <div class="ribbon">כרטיס פרימיום</div>
+          <div class="ribbon">חבילה מלאה</div>
           <p class="pc-label">כל 9 הסדנאות</p>
           <p class="pc-amount"><span>₪</span>350</p>
           <p class="best-value-note">המחיר המשתלם ביותר · ₪39 לסדנה בלבד</p>
